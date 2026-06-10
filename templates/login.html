@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load bootstrap5 %}
+
+{% block title %}
+home
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="m-auto">
+        <form method="post">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <input type="submit" value="Login">
+            <h5>Don't you have account</h5>
+            <a href="{% url 'register' %}">Register now</a>
+
+
+        </form>
+    </div>
+</div>
+{% endblock %}

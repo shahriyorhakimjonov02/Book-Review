@@ -2,7 +2,8 @@
 __pycache__/
 *.py[codz]
 *$py.class
-
+*.pyc
+*.pyo
 # C extensions
 *.so
 
@@ -60,6 +61,11 @@ cover/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+media/
+staticfiles/
+
+# IDE
+.idea/
 
 # Flask stuff:
 instance/
@@ -152,6 +158,7 @@ activemq-data/
 .envrc
 .venv
 env/
+.venv/
 venv/
 ENV/
 env.bak/

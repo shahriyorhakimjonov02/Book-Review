@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    {% for i in object_list %}
+    <div class="col-12 col-md-4 cpl-lg-3 mb-4">
+        <div class="card border position-relative">
+            <img src="{{ i.book_images.url }}" height="350" width="300" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ i.name }}</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Muallif: {{ i.author }}</li>
+                    <li class="list-group-item">Turi: {{ i.category.name }}</li>
+                    <li class="list-group-item">Rating: {{ i.avg_rating|default:"No rating yet" }}⭐</li>
+                </ul>
+                <div class="card">
+                    <a href="{% url 'book_detail' i.id %}" class="btn btn-success">
+                        About
+                    </a>
+                </div>
+                </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

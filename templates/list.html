@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between mb-3">
+    <h2>Category list</h2>
+
+    <a href="{% url 'create' %}" class="btn btn-primary">
+        Create book
+    </a>
+</div>
+
+<table class="table table-bordered">
+
+    <thead class="table-dark">
+        <tr>
+            <th>#</th>
+            <th>Book Name</th>
+            <th>Book Category</th>
+            <th>Book Author</th>
+            <th>Book Published Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for books in books %}
+        <tr>
+
+            <td>{{ forloop.counter }}</td>
+            <td>{{ books.name }}</td>
+            <td>{{ books.category }}</td>
+            <td>{{ books.author }}</td>
+            <td>{{ books.published_date }}</td>
+
+            <td>
+
+                <a href="{% url 'update' books.pk %}"
+                   class="btn btn-outline-success btn-sm">
+                    Update
+                </a>
+
+                <button
+                    class="btn btn-outline-danger btn-sm"
+                    data-bs-toggle="modal"
+                    data-bs-target="#deleteModal"
+                    data-id="{{ books.pk }}"
+                >
+                    Delete
+                </button>
+
+            </td>
+
+        </tr>
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+
+<!-- DELETE MODAL -->
+
+<div class="modal fade"
+     id="deleteModal"
+     tabindex="-1"
+     aria-labelledby="deleteModalLabel"
+     aria-hidden="true">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h1 class="modal-title fs-5" id="deleteModalLabel">
+                    Confirm delete
+                </h1>
+
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+                Are you sure about that?
+            </div>
+
+            <div class="modal-footer">
+
+                <form method="POST" id="deleteForm">
+
+                    {% csrf_token %}
+
+                    <button type="submit"
+                            class="btn btn-danger">
+                        Yes, delete it
+                    </button>
+
+                </form>
+
+                <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                    Cancel
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    const deleteModal = document.getElementById('deleteModal');
+
+    deleteModal.addEventListener('show.bs.modal', function (event) {
+
+        const button = event.relatedTarget;
+
+        const booksId = button.getAttribute('data-id');
+
+        const deleteForm = document.getElementById('deleteForm');
+
+        deleteForm.action = `/delete/${booksId}/`;
+
+    });
+
+</script>
+
+{% endblock %}

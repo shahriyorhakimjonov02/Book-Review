@@ -1,0 +1,10 @@
+django
+pillow
+django-quill-editor
+django-bootstrap-v5
+django-quill
+drf-spectacular
+django-rest-framework
+djangorestframework
+django-filter
+rest_framework_simplejwt
